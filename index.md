@@ -1,7 +1,3 @@
----
-layout: default
----
-
 ## PARALLEL 3D MESH INTERSECTIONS	
 
 
