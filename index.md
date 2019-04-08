@@ -1,3 +1,6 @@
+---
+layout: default
+---
 # PARALLEL 3D MESH INTERSECTIONS	
 
 This is the documentation/notes I have taken while learning about 3D(tetrahedral) meshes during my independent study. I used the program GMSH to create the meshes, and used Salles Viana Gomes de Magalhaes's, [MeshIntersection](https://github.com/sallesviana/MeshIntersection) program to find the intersections between two meshes.
