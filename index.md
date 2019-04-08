@@ -4,6 +4,7 @@ This is the documentation/notes I have taken while learning about 3D(tetrahedral
 
 ## Testing out Various Mesh Creation Programs
 _February 9, 2019_
+
 After testing out Gmsh and ONELAB, ONELAB seems to just be an extension of Gmsh with added capabilities for finite element research.
 
 So far I have watched a few basic Gmsh tutorial videos and have been reading more of the documentation from the Gmsh website. The program seems easy to use and is good for more than just creating meshes. It’s also good for basic geometry creation and post-processing on meshes. The basic process of creating a simple mesh is first by creating geometry—add points, connect these points by lines, make plane surfaces from the lines, and possibly add volume surfaces—for the mesh. 
