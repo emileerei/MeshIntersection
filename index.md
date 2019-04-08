@@ -1,8 +1,8 @@
-## PARALLEL 3D MESH INTERSECTIONS	
+# PARALLEL 3D MESH INTERSECTIONS	
 
 This is the documentation/notes I have taken while learning about 3D(tetrahedral) meshes during my independent study. I used the program GMSH to create the meshes, and used Salles Viana Gomes de Magalhaes's, [MeshIntersection](https://github.com/sallesviana/MeshIntersection) program to find the intersections between two meshes.
 
-# Testing out Various Mesh Creation Programs
+## Testing out Various Mesh Creation Programs
 _February 9, 2019_
 After testing out Gmsh and ONELAB, ONELAB seems to just be an extension of Gmsh with added capabilities for finite element research.
 
@@ -14,7 +14,7 @@ There are also two types of geometries, elementary entities and physical groups.
 
 I have also found that there are many options for viewing the geometry/mesh in useful ways such as changing the color of the mesh by vertex valence and viewing the object on a grid to see how large the object is. I will be trying to create some interesting 3D meshes (volume meshing) tomorrow.
 
-# Learning how to Use GMSH
+## Learning how to Use GMSH
 _February 11, 2019_
 
 I followed the the rest of the GMSH tutorial provided by the Applied Modeling and Computation Group (AMCG), which gave a good overview of various ways to create and edit geometry and meshes in GMSH.  And was able to create this 3D mesh of a cylinder-like object with a hold down the middle of it. This was easily created by using the GMSH extrude tool on two 2D rectangles which were extruded around an axis. I also did basic functions, such as creating simple geometry and creating surfaces, which connect the geometry, in the script that describes each GMSH file. The different colors on the cylinder represent different groups of geometry, which is what occurs when extruding or transforming the mesh in various ways.
