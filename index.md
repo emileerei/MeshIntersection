@@ -105,10 +105,14 @@ To run Salles’s program on these two meshes, I used Parallel because my laptop
 
 The data from the second table was output from Salles's MeshIntersection program.
 
-##
+## Trying out Self Intersecting Meshes
 _March 18, 2019_
 
 Today I will try and find the intersection between a the steps.gts.msh and a mesh which has self intersections. Salles’s program may crash if there any self-intersections or the mesh is invalid in other ways. I made a mesh with holes and two self-intersections.
+Below is the mesh that has self intersections:
+![Self Intersecting](/assets/screenshot10.png)
+
+And below is the table of data from the two input meshes, but the program crashed before being able to create an output mesh.
 ![Table 4](/assets/table4.png)
 
 “segmentation fault (core dumped)  ./meshIntersection chain.lium couch.lium 64 8 1 out.off” is what was given during the programming. This occured when triangulating polygons during retesselation. After trying to run this program twice, I received the same error both times. I suspect that this is due to the chain.gts.msh having self intersections. As noted by Salles, the program’s response to self intersecting meshes is unknown.
