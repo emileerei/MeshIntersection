@@ -49,7 +49,7 @@ The general AM process is pretty simple, “successive cross-sectional layers,�
 
 At least from what I have read so far of this overview paper, I think that the additive manufacturing process and various problems facing it are one of the more interesting, things I have learned about.
 
-## 
+## "QuickCSG" Reading
 _February 28, 2019_
 
 Notes from the “QuickCSG: Arbitrary and Faster Boolean Combinations of N Solids”:
@@ -104,3 +104,46 @@ To run Salles’s program on these two meshes, I used Parallel because my laptop
 ![Table 3](/assets/table3.png)
 
 The data from the second table was output from Salles's MeshIntersection program.
+
+##
+_March 18, 2019_
+
+Today I will try and find the intersection between a the steps.gts.msh and a mesh which has self intersections. Salles’s program may crash if there any self-intersections or the mesh is invalid in other ways. I made a mesh with holes and two self-intersections.
+![Table 4](/assets/table4.png)
+
+“segmentation fault (core dumped)  ./meshIntersection chain.lium couch.lium 64 8 1 out.off” is what was given during the programming. This occured when triangulating polygons during retesselation. After trying to run this program twice, I received the same error both times. I suspect that this is due to the chain.gts.msh having self intersections. As noted by Salles, the program’s response to self intersecting meshes is unknown.
+When trying to intersect chain.gts.msh with itself, an error also occurs. 
+“terminate called after throwing an instance of 'std::bad_alloc'
+    what():  std::bad_alloc
+zsh: abort (core dumped)  ./meshIntersection chain.lium chain.lium 64 8 1 out.off” 
+is the error thrown while in the process of detecting intersections.
+
+## Notes from Salles's Thesis
+_March 30, 2019_
+
+__Notes while reading “Exact and Parallel Intersections of 3D Triangular Meshes” by Salles Magalhaes.__
+3 Parts: (1) EPUG-Overlay — overlaying of 2D maps, (2) PinMesh — locating points in 3D meshes, and (3) 3D-EPUG-Overlay — computes intersection of two 3D meshes
+_EPUG-Overlay_ = _Exact Parallel Uniform Grid Overlay_
+
+- Problems in processing 3D models:
+  - Floating point arithmetic precision error
+  - Robustness
+  - Efficiency
+  - Complexity in algorithms for special cases
+  
+- Fixes in 3D-EPUG-Overlay:
+  - Exact arithmetic used
+  - _Simulation of Simplicity_ used for special cases
+  - Parallelization used to increase efficiency
+  
+- Roundoff Errors:
+  - Roundoff error = difference between actual value and floating-point value
+    - Floating-point value is approximation of actual non-integer value
+  - Can lead to failures where there should be none
+  - Arithmetic filters & interval arithmetic is used in 3D-EPUG-Overlay
+    - Simulation of Simplicity needs exact arithmetic
+    - Can support geometrical data where coordinates are not represented using rational numbers
+    - First, interval arithmetic is used, then an arithmetic filter will filter out unreliable results and recomputes them with exact arithmetic if interval arithmetic answer is unreliable
+    - Exact arithmetic is always necessary when new coordinates are computed
+    - Arithmetic filters utilized to accelerate the 3D mesh intersection
+
