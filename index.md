@@ -151,3 +151,9 @@ _EPUG-Overlay_ = _Exact Parallel Uniform Grid Overlay_
     - Exact arithmetic is always necessary when new coordinates are computed
     - Arithmetic filters utilized to accelerate the 3D mesh intersection
 
+## Additional Analysis
+_April 6, 2019_
+
+After reading more of Salles's thesis, which is mainly about 3D-EPUG-Overlay, I have possibly learned why the self-intersecting mesh I created, chain.gts.msh, fails to be intersected with any other mesh or itself. In Chapter 2.2 of his thesis, he provides various ways to represent spatial data and how he represents data for his EPUG-Overlay programs. The faces of the mesh are not explicitly stored in memory, so if there is a self-interesection or the mesh is not closed/watertight, the program can easily misinterpret the topology of the given mesh. This will later lead to errors, and I believe this is part of the reason as to why the self-intersecting mesh crashes the 3D-EPUG-Overlay program.
+
+I am not sure how this issue would be resolved easily without changing the way data is represented and stored for the program. Maybe there are ways to add an additional check for if the data seems wrong or inconsistent, then check if this is due to self-intersections and attempt to fix it. But it does seem somewhat outside the scope of the program.
