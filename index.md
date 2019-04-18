@@ -161,7 +161,7 @@ I am not sure how this issue would be resolved easily without changing the way d
 ## More Notes from Salles's Thesis
 _April 11, 2019_
 
-- Representing Spatial Data
+Representing Spatial Data
   - Represent maps as _chains_
     - _chains_: sequence of edges with the same adjacent faces
 	  - No self-intersections, only by common endpoints
@@ -171,35 +171,35 @@ _April 11, 2019_
     - No self-intersections
     - Must be a closed mesh
     
-- Overlay and point location
+Overlay and point location
 - (2D)
-  - PinMesh is faster than the currently known fasted algorithm, Relative Closest Triangle (RCT)
-	-	RCT finds closest triangles from a query point and uses the closest triangle to determine the query point’s location with respect to the polyhedron
+	- PinMesh is faster than the currently known fasted algorithm, Relative Closest Triangle (RCT)
+	- RCT finds closest triangles from a query point and uses the closest triangle to determine the query point’s location with respect to the polyhedron
 - (3D)
-	-	Common technique: convert polyhedra to volumetric representation (voxelization), then perform the overlay
-	-	Drawback: not always accurate or robust
-	-	Want speed, robustness, and accuracy
+	- Common technique: convert polyhedra to volumetric representation (voxelization), then perform the overlay
+	- Drawback: not always accurate or robust
+	- Want speed, robustness, and accuracy
   
-- Simulation of Simplicity
-	-	Symbolic perturbation technique to handle special cases of degeneracies or geometric coincidences
-	-	Idea: perturbation of points removes degeneracies
-	-	Implementation: perturbed by indeterminate infinitesimal value epsilon (has no meaning, just follows rules)
-	-	Only causes code to be slightly slower and only when degeneracies occur
+Simulation of Simplicity
+- Symbolic perturbation technique to handle special cases of degeneracies or geometric coincidences
+- Idea: perturbation of points removes degeneracies
+- Implementation: perturbed by indeterminate infinitesimal value epsilon (has no meaning, just follows rules)
+- Only causes code to be slightly slower and only when degeneracies occur
 
-- 2D Overlays:
-	-	Uniform 1st level grid created (cannot be parallelized)
-  -	Uniform 2nd level grid created for cells exceeding edge threshold (can be parallelized)\
-    -	Higher grid resolutions reduce intersection calculation times
-	  -	Depends on the size of original dataset
-	- Test for edge intersections first — more efficient
-	-	Parallelize the cell testing as each cell doesn’t affect the other
-	-	Label empty grid cells with information about face the cell is in
-	-	Dynamic data structures take a lot to initialize and are difficult to parallelize
+2D Overlays:
+- Uniform 1st level grid created (cannot be parallelized)
+- Uniform 2nd level grid created for cells exceeding edge threshold (can be parallelized)\
+	- Higher grid resolutions reduce intersection calculation times
+	- Depends on the size of original dataset
+- Test for edge intersections first — more efficient
+- Parallelize the cell testing as each cell doesn’t affect the other
+- Label empty grid cells with information about face the cell is in
+- Dynamic data structures take a lot to initialize and are difficult to parallelize
 
-- Parallel 3D Uniform Grid Creation
-	-	Uniformity = parallelization ease
-  -	Two scans over data to allocate one large chunk
-    - Ragged array reduces memory overhead — one slot per triangle
-	  - Better data locality and no data fragmentation
-	  - One allocation is faster than multiple small allocations
-  - Grid accelerates future computation of intersections
+Parallel 3D Uniform Grid Creation
+- Uniformity = parallelization ease
+- Two scans over data to allocate one large chunk
+	- Ragged array reduces memory overhead — one slot per triangle
+	- Better data locality and no data fragmentation
+	- One allocation is faster than multiple small allocations
+- Grid accelerates future computation of intersections
