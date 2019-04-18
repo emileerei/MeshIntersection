@@ -188,7 +188,7 @@ Simulation of Simplicity
 
 2D Overlays:
 - Uniform 1st level grid created (cannot be parallelized)
-- Uniform 2nd level grid created for cells exceeding edge threshold (can be parallelized)\
+- Uniform 2nd level grid created for cells exceeding edge threshold (can be parallelized)
 	- Higher grid resolutions reduce intersection calculation times
 	- Depends on the size of original dataset
 - Test for edge intersections first — more efficient
