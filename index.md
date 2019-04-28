@@ -203,3 +203,34 @@ Parallel 3D Uniform Grid Creation
 	- Better data locality and no data fragmentation
 	- One allocation is faster than multiple small allocations
 - Grid accelerates future computation of intersections
+
+## Last Notes from Salles's Thesis
+_April 20, 2019_
+
+- PinMesh: determine which polyhedron a given 3d point is located
+	- draw a ray from the query point outwards and determine triangles above and below the point
+- step 1: create the uniform grid and label empty cells with region identification
+- step 2: perform queries
+	- rational numbers used to avoid floating point roundoff errors
+	- grid easily constructed in parallel
+	- queries processed in parallel
+- using simulation of simplicity
+	- computation of perturbation should have low to no overhead
+- faster than the current fastest point location algorithm, RCT and able to handle more special cases 
+
+3D-EPUG-Overlay
+- two types of vertices : input and intersection vertices
+- two types of triangles: input and retesselation results
+- able to perturb second mesh in order to have no degeneracies/special cases during the intersection of meshes
+- mesh intersection algorithm: 1) local intersections between meshes are computed, 2) new mesh containing retesselated triangles at intersection edges, 3) remove triangles not needed
+- number of intersection tests is about linear in size of input map
+- lots of simplifications to 2D even though the 3D problem seem so much more complex than the 2D
+- experiments:
+	- measured in sections of : compute grid cell, first pass, second pass, refinement (last three are most memory intensive), list pairs of triangles, detect intersections, totals of grid creation and totals of intersection detection
+	- obviously with more threads, the program ran faster for each section of measured time
+	- ragged array storage seems to be the better solution, when looking at a parallel implementation
+		- more thread safe any more easily parallelized than vectors
+		- less memory allocation
+	- tcmalloc memory allocation was made for parallel memory allocation, so it is faster
+	- most optimized version avoids temporary memory allocations, uses tcmalloc, ragged arrays, and arithmetic filtering with interval arithmetic
+	
